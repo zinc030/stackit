@@ -2,10 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Job Post Details</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
 </head>
 <body>
-    <h1>Job Post Details</h1>
     <div th:insert="~{common/navbar}"></div>
+    <h1>Job Post Details</h1>
     <table>
         <tr th:if="${loggedInUser!=null}">
             <th>Bookmark</th>

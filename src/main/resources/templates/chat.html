@@ -2,22 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Chat</title>
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+	<script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <style>
-body,html{
-	height: 100%;
-	margin: 0;
-	background: rgb(44, 47, 59);
-   background: -webkit-linear-gradient(to right, rgb(40, 59, 34), rgb(54, 60, 70), rgb(32, 32, 43));
-	background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
-}
+
 
 .chat{
 	margin-top: auto;
 	margin-bottom: auto;
 }
-.card{
+.cardchat{
 	height: 500px;
 	border-radius: 15px !important;
 	background-color: rgba(0,0,0,0.4) !important;
@@ -38,7 +34,7 @@ body,html{
 	border-radius: 0 0 15px 15px !important;
 	border-top: 0 !important;
 }
-.container{
+.containerchat{
 	align-content: center;
 }
 .search{
@@ -232,13 +228,12 @@ body,html{
     </style>
 </head>
 <body>
-    <h1>Chat</h1>
 
 <div th:insert="~{common/navbar}"></div>
-<div class="container-fluid h-100">
+<div class="containerchat-fluid h-100">
     <div class="row justify-content-center h-100">		
         <div class="col-md-8 col-xl-6 chat">
-            <div class="card">
+            <div class="cardchat">
                 <div class="card-header msg_head">
                     <div class="d-flex bd-highlight">
                         <div class="img_cont">

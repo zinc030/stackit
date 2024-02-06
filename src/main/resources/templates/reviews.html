@@ -2,10 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Company Reviews</title>
+    <style>
+        .cont {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1em;
+        }
+        
+        .row label {
+            margin-right: 1em;
+        }
+        
+        .sort {
+            align-self: flex-end;
+        }
+        </style>
+            <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}" /> 
+            <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
 </head>
 <body>
-<h1>Company Details</h1>
-<div th:insert="~{common/navbar}"></div>
+    <div th:insert="~{common/navbar}"></div>
+    <h1>Company Details</h1>
 <h1 th:text="${company.name}"></h1>
 <p th:text="${company.description}"></p>
 <p>Number of Employees: <span th:text="${company.numEmp}"></span></p>
@@ -14,29 +37,36 @@
 
 <h2><a th:href="@{/company/{companyId}/reviews(companyId=${company.id})}">Reviews</a></h2>
 
-<form th:action="@{'/company/' + ${company.id} + '/reviews'}" method="get">
+<form th:action="@{'/company/' + ${company.id} + '/reviews'}" method="get" class="container">
     <input type="text" name="query" placeholder="Search reviews">
-    <label><input type="checkbox" name="stars" value="1"> 1 star</label>
-    <label><input type="checkbox" name="stars" value="2"> 2 stars</label>
-    <label><input type="checkbox" name="stars" value="3"> 3 stars</label>
-    <label><input type="checkbox" name="stars" value="4"> 4 stars</label>
-    <label><input type="checkbox" name="stars" value="5"> 5 stars</label>
-    <br>
-    <label><input type="checkbox" name="swFields" value="FRONTEND"> Frontend</label>
-    <label><input type="checkbox" name="swFields" value="BACKEND"> Backend</label>
-    <label><input type="checkbox" name="swFields" value="FULLSTACK"> Fullstack</label>
-    <label><input type="checkbox" name="swFields" value="DATA_ENGINEER"> Data Engineer</label>
-    <label><input type="checkbox" name="swFields" value="DATA_SCIENCE"> Data Science</label>
-    <label><input type="checkbox" name="swFields" value="DEVOPS"> DevOps</label>
-    <label><input type="checkbox" name="swFields" value="CYBERSECURITY"> Cybersecurity</label>
-    <label><input type="checkbox" name="swFields" value="GAME_DEVELOPER"> Game Developer</label>
-    <label><input type="checkbox" name="swFields" value="GENERAL"> General</label>
-    <label><input type="checkbox" name="swFields" value="ANONYMOUS"> Others</label>
 
-    <select name="sort">
-        <option value="mostRecent">Most Recent</option>
-        <option value="mostHelpful">Most Helpful</option>
-    </select>
+    <div class="row">
+        <label><input type="checkbox" name="stars" value="1"> 1 star</label>
+        <label><input type="checkbox" name="stars" value="2"> 2 stars</label>
+        <label><input type="checkbox" name="stars" value="3"> 3 stars</label>
+        <label><input type="checkbox" name="stars" value="4"> 4 stars</label>
+        <label><input type="checkbox" name="stars" value="5"> 5 stars</label>
+    </div>
+
+    <div class="row">
+        <label><input type="checkbox" name="swFields" value="FRONTEND"> Frontend</label>
+        <label><input type="checkbox" name="swFields" value="BACKEND"> Backend</label>
+        <label><input type="checkbox" name="swFields" value="FULLSTACK"> Fullstack</label>
+        <label><input type="checkbox" name="swFields" value="DATA_ENGINEER"> Data Engineer</label>
+        <label><input type="checkbox" name="swFields" value="DATA_SCIENCE"> Data Science</label>
+        <label><input type="checkbox" name="swFields" value="DEVOPS"> DevOps</label>
+        <label><input type="checkbox" name="swFields" value="CYBERSECURITY"> Cybersecurity</label>
+        <label><input type="checkbox" name="swFields" value="GAME_DEVELOPER"> Game Developer</label>
+        <label><input type="checkbox" name="swFields" value="GENERAL"> General</label>
+        <label><input type="checkbox" name="swFields" value="ANONYMOUS"> Others</label>
+    </div>
+
+    <div class="row">
+        <select name="sort" class="sort">
+            <option value="mostRecent">Most Recent</option>
+            <option value="mostHelpful">Most Helpful</option>
+        </select>
+    </div>
 
     <input type="submit" value="Filter">
 </form>

@@ -5,8 +5,8 @@
     <!-- Add your CSS and JavaScript files here -->
 </head>
 <body>
-    <h1>Bookmarked Job Posts</h1>
     <div th:insert="~{common/navbar}"></div>
+    <h1>Bookmarked Job Posts</h1>
 
     <ul>
         <li th:each="jobPost : ${jobPosts}">

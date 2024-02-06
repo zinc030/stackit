@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Head contents... -->
+    <title>New Review</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
+
 </head>
 <body>
-    <h1>New Review</h1>
     <div th:insert="~{common/navbar}"></div>
-    <form th:action="@{/company/{companyId}/reviews/new(companyId=${company.id})}" th:object="${review}" method="post">
+    <h1>New Review</h1>
+    <form th:action="@{/company/{companyId}/reviews/new(companyId=${company.id})}" th:object="${review}" method="post" class="container">
         <div>
             <label for="title">Review title:</label>
             <input type="text" id="title" th:field="*{title}">
@@ -14,18 +18,18 @@
             <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
         </div>
 
-        <div>
+        <div class="row">
             <label for="rating">Rate a Company:</label>
-            <input type="radio" id="rating1" th:field="*{rating}" value="1">
-            <label for="rating1">1</label>
-            <input type="radio" id="rating2" th:field="*{rating}" value="2">
-            <label for="rating2">2</label>
-            <input type="radio" id="rating3" th:field="*{rating}" value="3">
-            <label for="rating3">3</label>
-            <input type="radio" id="rating4" th:field="*{rating}" value="4">
-            <label for="rating4">4</label>
-            <input type="radio" id="rating5" th:field="*{rating}" value="5">
-            <label for="rating5">5</label>
+            
+            <label for="rating1"><input type="radio" id="rating1" th:field="*{rating}" value="1">1</label>
+            
+            <label for="rating2"><input type="radio" id="rating2" th:field="*{rating}" value="2">2</label>
+            
+            <label for="rating3"><input type="radio" id="rating3" th:field="*{rating}" value="3">3</label>
+            
+            <label for="rating4"><input type="radio" id="rating4" th:field="*{rating}" value="4">4</label>
+            
+            <label for="rating5"><input type="radio" id="rating5" th:field="*{rating}" value="5">5</label>
             <!-- Display validation error message for overallRating -->
             <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
         </div>
@@ -48,12 +52,12 @@
             <span th:if="${#fields.hasErrors('swField')}" th:errors="*{swField}"></span>
         </div>
 
-        <div>
+        <div class="row">
             <label for="status">Status:</label>
-            <input type="radio" id="current" th:field="*{status}" value="CURRENT">
-            <label for="current">Current</label>
-            <input type="radio" id="former" th:field="*{status}" value="FORMER">
-            <label for="former">Former</label>
+            
+            <label for="current"><input type="radio" id="current" th:field="*{status}" value="CURRENT">Current</label>
+            
+            <label for="former"><input type="radio" id="former" th:field="*{status}" value="FORMER">Former</label>
             <!-- Display validation error message for status -->
             <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
         </div>

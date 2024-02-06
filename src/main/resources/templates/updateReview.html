@@ -4,8 +4,9 @@
     <!-- Head contents... -->
 </head>
 <body>
-    <h1>New Review</h1>
+    
     <div th:insert="~{common/navbar}"></div>
+    <h1>New Review</h1>
     <form th:action="@{/company/{companyId}/reviews/{reviewId}/edit(companyId=${review.company.id}, reviewId=${review.id})}" th:object="${review}" method="post">
         <div>
             <label for="title">Review title:</label>

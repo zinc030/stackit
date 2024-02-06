@@ -2,59 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Job Posts</title>
+    <style>
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+    }
+
+    .row label {
+        margin-right: 1em;
+    }
+    </style>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
 </head>
 <body>
-    <h1>Job Posts</h1>
     <div th:insert="~{common/navbar}"></div>
-    <form id="searchForm" th:action="@{/jobposts/search}" method="post">
+    <h1>Job Posts</h1>
+    <form id="searchForm" th:action="@{/jobposts/search}" method="post" class="container">
         <input type="text" name="query" placeholder="Title or Company Name">
         <input type="number" name="minSalary" placeholder="Minimum Salary">
         <input type="number" name="maxSalary" placeholder="Max Salary">
         
-        <div>
-            <label for="seniority">Seniority:</label><br>
-            <input type="checkbox" id="intern" name="seniority" value="INTERNSHIP">
-            <label for="intern">Internship</label><br>
-            <input type="checkbox" id="entry" name="seniority" value="ENTRY">
-            <label for="entry">Entry</label><br>
-            <input type="checkbox" id="junior" name="seniority" value="JUNIOR">
-            <label for="junior">Junior</label><br>
-            <input type="checkbox" id="mid_level" name="seniority" value="MID_SENIOR">
-            <label for="mid_level">Mid Level</label><br>
-            <input type="checkbox" id="senior" name="seniority" value="SENIOR">
-            <label for="senior">Senior</label><br>
+        <div class="row">
+            <label for="seniority">Seniority:</label>
+            <label for="intern"><input type="checkbox" id="intern" name="seniority" value="INTERNSHIP">Internship</label>
+            <label for="entry"><input type="checkbox" id="entry" name="seniority" value="ENTRY">Entry</label>
+            <label for="junior"><input type="checkbox" id="junior" name="seniority" value="JUNIOR">Junior</label>
+            <label for="mid_level"><input type="checkbox" id="mid_level" name="seniority" value="MID_SENIOR">Mid Level</label>
+            <label for="senior"><input type="checkbox" id="senior" name="seniority" value="SENIOR">Senior</label>
         </div>
         
-        <div>
-            <label for="employmentType">Employment Type:</label><br>
-            <input type="checkbox" id="full_time" name="employmentType" value="FULLTIME">
-            <label for="full_time">Full Time</label><br>
-            <input type="checkbox" id="part_time" name="employmentType" value="PARTTIME">
-            <label for="part_time">Part Time</label><br>
-            <input type="checkbox" id="contract" name="employmentType" value="CONTRACT">
-            <label for="contract">Contract</label><br>
-            <input type="checkbox" id="intern" name="employmentType" value="INTERNSHIP">
-            <label for="intern">Internship</label><br>
+        <div class="row">
+            <label for="employmentType">Employment Type:</label>
+            <label for="full_time"><input type="checkbox" id="full_time" name="employmentType" value="FULLTIME">Full Time</label>
+            <label for="part_time"><input type="checkbox" id="part_time" name="employmentType" value="PARTTIME">Part Time</label>
+            <label for="contract"><input type="checkbox" id="contract" name="employmentType" value="CONTRACT">Contract</label>
+            <label for="intern"><input type="checkbox" id="intern" name="employmentType" value="INTERNSHIP">Internship</label>
         </div>
         
-        <div>
-            <label for="swFields">Software Fields:</label><br>
-            <input type="checkbox" id="frontend" name="swFields" value="FRONTEND">
-            <label for="frontend">Frontend</label><br>
-            <input type="checkbox" id="backend" name="swFields" value="BACKEND">
-            <label for="backend">Backend</label><br>
-            <input type="checkbox" id="fullstack" name="swFields" value="FULLSTACK">
-            <label for="fullstack">Fullstack</label><br>
-            <input type="checkbox" id="data_engineer" name="swFields" value="DATA_ENGINEER">
-            <label for="data_engineer">Data Engineer</label><br>
-            <input type="checkbox" id="data_science" name="swFields" value="DATA_SCIENCE">
-            <label for="data_science">Data Science</label><br>
-            <input type="checkbox" id="devops" name="swFields" value="DEVOPS">
-            <label for="devops">DevOps</label><br>
-            <input type="checkbox" id="cybersecurity" name="swFields" value="CYBERSECURITY">
-            <label for="cybersecurity">Cybersecurity</label><br>
-            <input type="checkbox" id="game_developer" name="swFields" value="GAME_DEVELOPER">
-            <label for="game_developer">Game Developmet</label><br>
+        <div class="row">
+            <label for="swFields">Software Fields:</label>
+            <label for="frontend"><input type="checkbox" id="frontend" name="swFields" value="FRONTEND">Frontend</label>
+            <label for="backend"><input type="checkbox" id="backend" name="swFields" value="BACKEND">Backend</label>
+            <label for="fullstack"><input type="checkbox" id="fullstack" name="swFields" value="FULLSTACK">Fullstack</label>
+            <label for="data_engineer"><input type="checkbox" id="data_engineer" name="swFields" value="DATA_ENGINEER">Data Engineer</label>
+            <label for="data_science"><input type="checkbox" id="data_science" name="swFields" value="DATA_SCIENCE">Data Science</label>
+            <label for="devops"><input type="checkbox" id="devops" name="swFields" value="DEVOPS">DevOps</label>
+            <label for="cybersecurity"><input type="checkbox" id="cybersecurity" name="swFields" value="CYBERSECURITY">Cybersecurity</label>
+            <label for="game_developer"><input type="checkbox" id="game_developer" name="swFields" value="GAME_DEVELOPER">Game Developmet</label>
         </div>
         
         
