@@ -11,14 +11,15 @@
  Target Server Version : 110102
  File Encoding         : 65001
 
- Date: 06/02/2024 14:51:14
+ Date: 06/02/2024 15:20:34
 */
+
+Drop DATABASE IF EXISTS `stack_it`;
+CREATE DATABASE stack_it;
+USE stack_it;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
-CREATE DATABASE stack_it;
-USE stack_it;
 
 -- ----------------------------
 -- Table structure for analysis_image
@@ -45,12 +46,12 @@ CREATE TABLE `analysis_image_seq`  (
   `next_not_cached_value` bigint(21) NOT NULL,
   `minimum_value` bigint(21) NOT NULL,
   `maximum_value` bigint(21) NOT NULL,
-  `start_value` bigint(21) NOT NULL COMMENT 'start value when sequences is created or value if RESTART is used',
-  `increment` bigint(21) NOT NULL COMMENT 'increment value',
+  `start_value` bigint(21) NOT NULL,
+  `increment` bigint(21) NOT NULL,
   `cache_size` bigint(21) UNSIGNED NOT NULL,
-  `cycle_option` tinyint(1) UNSIGNED NOT NULL COMMENT '0 if no cycles are allowed, 1 if the sequence should begin a new cycle when maximum_value is passed',
-  `cycle_count` bigint(21) NOT NULL COMMENT 'How many cycles have been done'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+  `cycle_option` tinyint(1) UNSIGNED NOT NULL,
+  `cycle_count` bigint(21) NOT NULL 
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of analysis_image_seq
@@ -405,12 +406,12 @@ CREATE TABLE `user_preference_seq`  (
   `next_not_cached_value` bigint(21) NOT NULL,
   `minimum_value` bigint(21) NOT NULL,
   `maximum_value` bigint(21) NOT NULL,
-  `start_value` bigint(21) NOT NULL COMMENT 'start value when sequences is created or value if RESTART is used',
-  `increment` bigint(21) NOT NULL COMMENT 'increment value',
+  `start_value` bigint(21) NOT NULL,
+  `increment` bigint(21) NOT NULL,
   `cache_size` bigint(21) UNSIGNED NOT NULL,
-  `cycle_option` tinyint(1) UNSIGNED NOT NULL COMMENT '0 if no cycles are allowed, 1 if the sequence should begin a new cycle when maximum_value is passed',
-  `cycle_count` bigint(21) NOT NULL COMMENT 'How many cycles have been done'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+  `cycle_option` tinyint(1) UNSIGNED NOT NULL ,
+  `cycle_count` bigint(21) NOT NULL 
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of user_preference_seq
@@ -465,12 +466,12 @@ CREATE TABLE `users_seq`  (
   `next_not_cached_value` bigint(21) NOT NULL,
   `minimum_value` bigint(21) NOT NULL,
   `maximum_value` bigint(21) NOT NULL,
-  `start_value` bigint(21) NOT NULL COMMENT 'start value when sequences is created or value if RESTART is used',
-  `increment` bigint(21) NOT NULL COMMENT 'increment value',
+  `start_value` bigint(21) NOT NULL ,
+  `increment` bigint(21) NOT NULL ,
   `cache_size` bigint(21) UNSIGNED NOT NULL,
-  `cycle_option` tinyint(1) UNSIGNED NOT NULL COMMENT '0 if no cycles are allowed, 1 if the sequence should begin a new cycle when maximum_value is passed',
-  `cycle_count` bigint(21) NOT NULL COMMENT 'How many cycles have been done'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+  `cycle_option` tinyint(1) UNSIGNED NOT NULL ,
+  `cycle_count` bigint(21) NOT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of users_seq
