@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Head contents... -->
+</head>
+<body>
+    <h1>New Review</h1>
+    <div th:insert="~{common/navbar}"></div>
+    <form th:action="@{/company/{companyId}/reviews/{reviewId}/edit(companyId=${review.company.id}, reviewId=${review.id})}" th:object="${review}" method="post">
+        <div>
+            <label for="title">Review title:</label>
+            <input type="text" id="title" th:field="*{title}">
+            <!-- Display validation error message for title -->
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+        </div>
+
+        <div>
+            <label for="rating">Rate a Company:</label>
+            <input type="radio" id="rating1" th:field="*{rating}" value="1">
+            <label for="rating1">1</label>
+            <input type="radio" id="rating2" th:field="*{rating}" value="2">
+            <label for="rating2">2</label>
+            <input type="radio" id="rating3" th:field="*{rating}" value="3">
+            <label for="rating3">3</label>
+            <input type="radio" id="rating4" th:field="*{rating}" value="4">
+            <label for="rating4">4</label>
+            <input type="radio" id="rating5" th:field="*{rating}" value="5">
+            <label for="rating5">5</label>
+            <!-- Display validation error message for overallRating -->
+            <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+        </div>
+
+        <div> 
+            <label for="swField">Software Field:</label>
+            <select id="swField" th:field="*{swField}">
+                <option value="FRONTEND">Frontend Engineer</option>
+                <option value="BACKEND">Backend Engineer</option>
+                <option value="FULLSTACK">Fullstack Engineer</option>
+                <option value="DATA_ENGINEER">Data Engineer</option>
+                <option value="DATA_SCIENCE">Data Scientist</option>
+                <option value="DEVOPS">DevOps Engineer</option>
+                <option value="CYBERSECURITY">Cybersecurity</option>
+                <option value="GAME_DEVELOPER">Game Developer</option>
+                <option value="GENERAL">General Software Engineer</option>
+                <option value="ANONYMOUS">Prefer not to say</option>
+            </select>
+            <!-- Display validation error message for swField -->
+            <span th:if="${#fields.hasErrors('swField')}" th:errors="*{swField}"></span>
+        </div>
+
+        <div>
+            <label for="status">Status:</label>
+            <input type="radio" id="current" th:field="*{status}" value="CURRENT">
+            <label for="current">Current</label>
+            <input type="radio" id="former" th:field="*{status}" value="FORMER">
+            <label for="former">Former</label>
+            <!-- Display validation error message for status -->
+            <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+        </div>
+
+        <div>
+            <label for="pro">Pro:</label>
+            <textarea id="pro" th:field="*{pro}"></textarea>
+            <!-- Display validation error message for pro -->
+            <span th:if="${#fields.hasErrors('pro')}" th:errors="*{title}"></span>
+        </div>
+
+        <div>
+            <label for="con">Con:</label>
+            <textarea id="con" th:field="*{con}"></textarea>
+            <!-- Display validation error message for con -->
+            <span th:if="${#fields.hasErrors('con')}" th:errors="*{title}"></span>
+        </div>
+
+        <div>
+            <label for="advice">Advice for Management:</label>
+            <textarea id="advice" th:field="*{advice}"></textarea>
+            <!-- Display validation error message for advice -->
+            <span th:if="${#fields.hasErrors('advice')}" th:errors="*{title}"></span>
+        </div>
+
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>

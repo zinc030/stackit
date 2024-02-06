@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>My Account</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+</head>
+<body>
+    <h1>Account</h1>
+    <div th:insert="~{common/navbar}"></div>
+    <a th:href="@{/account/personal-info}">Change Personal Info</a>
+    </br>
+    <a th:href="@{/}">Customer Service</a>
+    </br>
+    <a th:href="@{/account/delete}">Delete Account</a>
+<form id="preferenceForm" action="#" th:action="@{/account/setPreferences}" th:object="${userPreference}" method="post">
+    <h2>Set your preferences</h2>
+    <div>
+        <input type="checkbox" id="frontend" name="softwareFields" value="frontend" th:checked="${userPreference.softwareFields.contains('frontend')}">
+        <label for="frontend">Frontend</label>
+    </div>
+    <div>
+        <input type="checkbox" id="backend" name="softwareFields" value="backend" th:checked="${userPreference.softwareFields.contains('backend')}">
+        <label for="backend">Backend</label>
+    </div>
+    <div>
+        <input type="checkbox" id="fullstack" name="softwareFields" value="fullstack" th:checked="${userPreference.softwareFields.contains('fullstack')}">
+        <label for="fullstack">Fullstack</label>
+    </div>
+    <div>
+        <input type="checkbox" id="data_engineer" name="softwareFields" value="data_engineer" th:checked="${userPreference.softwareFields.contains('data_engineer')}">
+        <label for="data_engineer">Data Engineer</label>
+    </div>
+    <div>
+        <input type="checkbox" id="data_science" name="softwareFields" value="data_science" th:checked="${userPreference.softwareFields.contains('data_science')}">
+        <label for="data_science">Data Science</label>
+    </div>
+    <div>
+        <input type="checkbox" id="devops" name="softwareFields" value="devops" th:checked="${userPreference.softwareFields.contains('devops')}">
+        <label for="devops">DevOps</label>
+    </div>
+    <div>
+        <input type="checkbox" id="cybersecurity" name="softwareFields" value="cybersecurity" th:checked="${userPreference.softwareFields.contains('cybersecurity')}">
+        <label for="cybersecurity">Cybersecurity</label>
+    </div>
+    <div>
+        <input type="checkbox" id="game_developer" name="softwareFields" value="game_developer" th:checked="${userPreference.softwareFields.contains('game_developer')}">
+        <label for="game_developer">Game Developer</label>
+    </div>
+    <div>
+        <input type="checkbox" id="general" name="softwareFields" value="general" th:checked="${userPreference.softwareFields.contains('general')}">
+        <label for="general">General</label>
+    </div>
+    <div>
+        <input type="submit" value="Update">
+    </div>
+</form>
+
+<script>
+    document.getElementById('preferenceForm').addEventListener('submit', function(e) {
+        var checkboxes = this.querySelectorAll('input[type="checkbox"]');
+        var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+        if (!checkedOne) {
+            alert('You must check at least one box.');
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

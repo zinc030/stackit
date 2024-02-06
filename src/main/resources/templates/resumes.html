@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Head contents... -->
+    <title>Resumes</title>
+</head>
+<body>
+    <h1>Resume (이력서)</h1>
+    <div th:insert="~{common/navbar}"></div>
+
+    <!-- get method link button for new resume (/resume/new) -->
+    <a th:href="@{/resume/new}">New Resume (새 이력서)</a>
+
+    <ul>
+        <li th:each="resume : ${resumes}">
+            <a th:href="@{/resume/{id}(id=${resume.id})}" th:text="${resume.positionName}"></a>
+            <!-- create date -->
+            <p th:text="${resume.dateCreated}"></p>
+            <!-- Other resume details... -->
+            <!-- Edit button -->
+            <a th:href="@{/resume/{id}/edit(id=${resume.id})}">Edit</a>
+
+            <!-- Delete button -->
+            <form th:action="@{/resume/{id}/delete(id=${resume.id})}" method="post">
+                <input type="submit" value="Delete">
+            </form>
+        </li>
+    </ul>
+</body>
+</html>

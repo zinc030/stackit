@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Company Reviews</title>
+</head>
+<body>
+<h1>Company Details</h1>
+<div th:insert="~{common/navbar}"></div>
+<h1 th:text="${company.name}"></h1>
+<p th:text="${company.description}"></p>
+<p>Number of Employees: <span th:text="${company.numEmp}"></span></p>
+
+<a th:href="@{/company/{companyId}/reviews/new(companyId=${company.id})}">Add a new review</a>
+
+<h2><a th:href="@{/company/{companyId}/reviews(companyId=${company.id})}">Reviews</a></h2>
+
+<form th:action="@{'/company/' + ${company.id} + '/reviews'}" method="get">
+    <input type="text" name="query" placeholder="Search reviews">
+    <label><input type="checkbox" name="stars" value="1"> 1 star</label>
+    <label><input type="checkbox" name="stars" value="2"> 2 stars</label>
+    <label><input type="checkbox" name="stars" value="3"> 3 stars</label>
+    <label><input type="checkbox" name="stars" value="4"> 4 stars</label>
+    <label><input type="checkbox" name="stars" value="5"> 5 stars</label>
+    <br>
+    <label><input type="checkbox" name="swFields" value="FRONTEND"> Frontend</label>
+    <label><input type="checkbox" name="swFields" value="BACKEND"> Backend</label>
+    <label><input type="checkbox" name="swFields" value="FULLSTACK"> Fullstack</label>
+    <label><input type="checkbox" name="swFields" value="DATA_ENGINEER"> Data Engineer</label>
+    <label><input type="checkbox" name="swFields" value="DATA_SCIENCE"> Data Science</label>
+    <label><input type="checkbox" name="swFields" value="DEVOPS"> DevOps</label>
+    <label><input type="checkbox" name="swFields" value="CYBERSECURITY"> Cybersecurity</label>
+    <label><input type="checkbox" name="swFields" value="GAME_DEVELOPER"> Game Developer</label>
+    <label><input type="checkbox" name="swFields" value="GENERAL"> General</label>
+    <label><input type="checkbox" name="swFields" value="ANONYMOUS"> Others</label>
+
+    <select name="sort">
+        <option value="mostRecent">Most Recent</option>
+        <option value="mostHelpful">Most Helpful</option>
+    </select>
+
+    <input type="submit" value="Filter">
+</form>
+
+<ul>
+    <li th:each="review : ${reviews}">
+        <h3 th:text="${review.title}"></h3>
+        <form th:if="${loggedInUser!=null and loggedInUser.username == review.user.username}" th:action="@{/company/{companyId}/reviews/{reviewId}/edit(companyId=${company.id}, reviewId=${review.id})}" method="get">
+            <input type="submit" value="Edit">
+        </form>
+        <form th:if="${loggedInUser!=null and loggedInUser.username == review.user.username}" th:action="@{/company/{companyId}/reviews/{reviewId}/delete(companyId=${company.id}, reviewId=${review.id})}" method="post">
+            <input type="submit" value="Delete">
+        </form>
+        <p th:text="${review.swField}"></p>
+        <p th:text="${review.status}"></p>
+        <p th:text="${review.rating}"></p>
+        <p th:text="${review.pro}"></p>
+        <p th:text="${review.con}"></p>
+        <div>Helpful votes: <span th:text="${review.voteCount}"></span></div>
+        <p th:text="${review.createdDate}"></p>
+        <form th:if="${loggedInUser!=null}" th:action="@{/company/reviews/{id}/helpfulVote(id=${review.id})}" method="post">
+            <input type="hidden" th:value="${review.id}" name="reviewId"/>
+            <button type="submit" th:text="${#lists.contains(currentUser.helpfulReviews, review) ? 'Undo helpful vote' : 'Mark as helpful'}"></button>
+        </form>
+        <form th:if="${loggedInUser!=null}" th:action="@{'/company/' + ${company.id} + '/reviews/' + ${review.id} + '/report'}" th:object="${report}" method="post">
+            <select th:field="*{reason}">
+                <option value="Reason 1">Reason 1</option>
+                <option value="Reason 2">Reason 2</option>
+                <!-- Add more options as needed -->
+            </select>
+            <button type="submit">Report</button>
+        </form>
+        <br>
+
+    </li>
+</ul>
+</body>
+<script>
+    // When a checkbox is clicked, save its checked state to Local Storage
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function(event) {
+            localStorage.setItem(event.target.value, event.target.checked);
+        });
+    });
+    
+    // When the page loads, check Local Storage for any saved checkbox states and apply them
+    window.addEventListener('load', function() {
+        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            var checked = localStorage.getItem(checkbox.value);
+            if (checked !== null) {
+                checkbox.checked = checked === 'true';
+            }
+        });
+    });
+</script>
+</html>

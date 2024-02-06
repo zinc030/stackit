@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Helpful Reviews</title>
+    <!-- Add your CSS and JavaScript files here -->
+</head>
+<body>
+    <h1>Helpful Reviews</h1>
+    <div th:insert="~{common/navbar}"></div>
+
+    <ul>
+        <li th:each="review : ${helpfulReviews}">
+            <h2 th:text="${review.title}"></h2>
+            <p th:text="${review.rating}"></p>
+            <p th:text="${review.pro}"></p>
+            <p th:text="${review.con}"></p>
+        </li>
+    </ul>
+</body>
+</html>

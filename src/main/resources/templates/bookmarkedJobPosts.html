@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bookmarked Job Posts</title>
+    <!-- Add your CSS and JavaScript files here -->
+</head>
+<body>
+    <h1>Bookmarked Job Posts</h1>
+    <div th:insert="~{common/navbar}"></div>
+
+    <ul>
+        <li th:each="jobPost : ${jobPosts}">
+            <a th:href="@{/jobposts/{id}(id=${jobPost.id})}" th:text="${jobPost.title}"></a>
+            <p><strong>Company:</strong> <span th:text="${jobPost.company.name}"></span></p>
+            <p><strong>Salary:</strong> <span th:text="${jobPost.salary}"></span></p>
+            <p><strong>Seniority:</strong> <span th:text="${jobPost.seniority}"></span></p>
+            <p><strong>Employment Type:</strong> <span th:text="${jobPost.employmentType}"></span></p>
+        </li>
+    </ul>
+</body>
+</html>

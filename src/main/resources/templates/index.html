@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stack IT</title>
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}" /> 
+    <script
+    src="https://kit.fontawesome.com/c4254e24a8.js"
+    crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- <h1><a th:href="@{/}">Index</a></h1>
+    <div th:insert="~{common/navbar}"></div>
+    <ul>
+        <li><a th:href="@{/jobposts}">Job Posts (채용 공고)</a></li>
+        <li><a th:href="@{/company}">Company (기업)</a></li>
+        <li><a th:href="@{/resume}">Resume (이력서)</a></li>
+        <li><a th:href="@{/my/jobposts}">Bookmarked JobPosts (즐겨찾기한 채용공고)</a></li>
+        <li><a th:href="@{/my/helpfulVotes}">Helpful Reviews (추천한 리뷰)</a></li>
+        <li><a th:href="@{/chat}">Chatbot</a></li>
+    </ul> -->
+
+    <div id="header">
+        <div class="container">
+          <nav>
+            <a th:href="@{/}">
+                <img th:src="@{/images/logo.png}" class="logo" alt="stack_it_logo"/>
+            </a>
+            <ul id="sidemenu">
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/jobposts}">Job Posts</a></li>
+                <li><a th:href="@{/company}">Company</a></li>
+                <!-- <li><a th:href="@{/resume}">Resume</a></li>
+                <li><a th:href="@{/my/jobposts}">Bookmarked JobPosts</a></li>
+                <li><a th:href="@{/my/helpfulVotes}">Helpful Reviews</a></li> -->
+                <li><a th:href="@{/chat}">Chatbot</a></li>
+
+                <th:block th:if="${loggedInUser != null}">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" th:href="@{/account}">Account</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                  </li>
+                </th:block>
+                <th:block th:if="${loggedInUser == null}">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
+                  </li>
+                </th:block>
+              <i class="fas fa-times" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+          </nav>
+          <div class="header-text">
+            <p>STACK IT</p>
+            <h1>
+              Build your <span>Career</span><br />
+              in <span>Software Engineering</span> field
+            </h1>
+          </div>
+        </div>
+      </div>
+
+ <!-- ---------About -->
+
+ <div id="about">
+    <div class="container">
+      <div class="row">
+        <div class="about-col-1">
+          <img src="https://cdn.vox-cdn.com/thumbor/L659Ie9sWMjQ_WMNwJNQcNshDfU=/0x0:4256x2832/1200x800/filters:focal(2133x828:2813x1508)/cdn.vox-cdn.com/uploads/chorus_image/image/66201540/601067550.jpg.0.jpg" alt="some_bird_png" />
+        </div>
+        <div class="about-col-2">
+          <h1 class="sub-title">Peregrine Falcon</h1>
+          <p>
+             The peregrine is a highly successful example of urban wildlife in much of its range, taking advantage of tall buildings as nest sites and an abundance of prey such as pigeons and ducks. Both the English and scientific names of this species mean "wandering falcon", referring to the migratory habits of many northern populations. Experts recognize 17 to 19 subspecies, which vary in appearance and range; disagreement exists over whether the distinctive Barbary falcon is represented by two subspecies of Falco peregrinus or is a separate species, F. pelegrinoides. The two species' divergence is relatively recent, during the time of the last ice age, therefore the genetic differential between them (and also the difference in their appearance) is relatively tiny. They are only about 0.6–0.8% genetically differentiated.<br>
+             The peregrine falcon is a well-respected falconry bird due to its strong hunting ability, high trainability, versatility, and availability via captive breeding. It is effective on most game bird species, from small to large. It has also been used as a religious, royal, or national symbol across multiple eras and areas of human civilization. 
+          </p>
+
+          <div class="tab-titles">
+            <p class="tab-links active-link" onclick="opentab('skills')">
+              Scientific Classification
+            </p>
+            <p class="tab-links" onclick="opentab('experience')">
+              Description
+            </p>
+            <p class="tab-links" onclick="opentab('education')">Misc.</p>
+          </div>
+          <div class="tab-contents active-tab" id="skills">
+            <ul>
+              <li><span>Family</span><br />Falconidae</li>
+              <li><span>Genus</span><br />Falco</li>
+              <li><span>Species</span><br />F. peregrinus</li>
+            </ul>
+          </div>
+          <div class="tab-contents" id="experience">
+            <ul>
+              <li><span>Body length</span><br />34 to 58 cm (13–23 in)</li>
+              <li>
+                <span>Wingspan</span><br />74 to 120 cm (29–47 in)
+              </li>
+              <li><span>Tail measures</span><br />13 to 19 cm (5.1–7.5 in)</li>
+            </ul>
+          </div>
+          <div class="tab-contents" id="education">
+            <ul>
+              <li><span>Conservation status</span><br />Least concern</li>
+              <li><span>Ecology</span><br />lives mostly along mountain ranges, river valleys, coastlines, and increasingly in cities.</li>
+              <li><span>Speed</span><br />The peregrine falcon reaches faster speeds than any other animal on the planet when performing the stoop,[6] which involves soaring to a great height and then diving steeply at speeds of over 320 km/h (200 mph)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -----services--- -->
+  <div id="services">
+    <div class="container">
+      <h1 class="sub-title">Random Facts</h1>
+      <div class="services-list">
+        <div>
+          <i class="fa-solid fa-crow"></i>
+          <h2>Sleep</h2>
+          <p>
+            Some birds sleep with one eye open.
+          </p>
+          <a href="#">Learn more</a>
+        </div>
+        <div>
+          <i class="fa-solid fa-crow"></i>
+          <h2>Penguins</h2>
+          <p>
+            Penguins can jump so high as 9 feet!
+          </p>
+          <a href="#">Learn more</a>
+        </div>
+        <div>
+          <i class="fa-solid fa-crow"></i>
+          <h2>Bird Population</h2>
+          <p>
+            Bird extinction rates are increasing 
+          </p>
+          <a href="#">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ------------------birds_of_prey----- -->
+  <div id="portfolio">
+    <div class="container">
+      <h1 class="sub-title">Birds of Prey</h1>
+      <div class="work-list">
+        <div class="work">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Bald_Eagle_Portrait.jpg" alt="bald_eagle" />
+          <div class="layer">
+            <h3>Bald Eagle</h3>
+            <p>
+              The bald eagle is an opportunistic feeder which subsists mainly on fish, which it swoops down upon and snatches from the water with its talons. It builds the largest nest of any North American bird and the largest tree nests ever recorded for any animal species, up to 4 m (13 ft) deep, 2.5 m (8.2 ft) wide, and 1 metric ton (1.1 short tons) in weight.
+            </p>
+            <a href="https://en.wikipedia.org/wiki/Bald_eagle"><i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+        <div class="work">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Bubo_virginianus_06.jpg/800px-Bubo_virginianus_06.jpg" alt="great_horned_owl" />
+          <div class="layer">
+            <h3>Great Horned Owl</h3>
+            <p>
+              The great horned owl (Bubo virginianus), also known as the tiger owl (originally derived from early naturalists' description as the "winged tiger" or "tiger of the air"), or the hoot owl, is a large owl native to the Americas. It is an extremely adaptable bird with a vast range and is the most widely distributed true owl in the Americas. Its primary diet is rabbits and hares, rats and mice, and voles, although it freely hunts any animal it can overtake, including rodents and other small mammals, larger mid-sized mammals, birds, reptiles, amphibians, and invertebrates.
+            </p>
+            <a href="https://en.wikipedia.org/wiki/Great_horned_owl"><i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+        <div class="work">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Coragyps-atratus-001.jpg/800px-Coragyps-atratus-001.jpg" alt="vulture" />
+          <div class="layer">
+            <h3>Vulture</h3>
+            <p>
+              A vulture is a bird of prey that scavenges on carrion. There are 23 extant species of vulture (including Condors). Old World vultures include 16 living species native to Europe, Africa, and Asia; New World vultures are restricted to North and South America and consist of seven identified species, all belonging to the Cathartidae family. A particular characteristic of many vultures is a bald, unfeathered head. This bare skin is thought to keep the head clean when feeding, and also plays an important role in thermoregulation.
+            </p>
+            <a href="#"><i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="btn">See more</a>
+    </div>
+  </div>
+  <!-- ----------contact----------- -->
+  <div id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="contact-left">
+          <h1 class="sub-title">Contact Me</h1>
+          <p>
+            <a href="#"><i class="fas fa-paper-plane"></i></a
+            >contact@example.com
+          </p>
+          <p>
+            <a href="#"><i class="fas fa-phone-square-alt"></i></a>01012341234
+          </p>
+          <div class="social-icons">
+            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-facebook"></i></a>
+            <a href=""><i class="fab fa-linkedin"></i></a>
+          </div>
+          <a href="" download class="btn btn2">Download CV</a>
+        </div>
+        <div class="contact-right">
+          <form>
+            <input type="text" name="name" placeholder="Your Name" requried />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="Message"
+              rows="6"
+              placeholder="Your Message"
+            ></textarea>
+            <button type="submit" class="btn btn2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>some copyright claim<i class="fas fa-heart"></i></p>
+    </div>
+  </div>
+
+  <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+  <!-- <script>
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname) {
+      for (tablink of tablinks) {
+        tablink.classList.remove("active-link");
+      }
+      for (tabcontent of tabcontents) {
+        tabcontent.classList.remove("active-tab");
+      }
+      event.currentTarget.classList.add("active-link");
+      document.getElementById(tabname).classList.add("active-tab");
+    }
+  </script>
+  <script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu() {
+      sidemenu.style.right = "0";
+    }
+    function closemenu() {
+      sidemenu.style.right = "-200";
+    }
+  </script>
+  <script>
+    let mybutton = document.getElementById("myBtn");
+    window.onscroll = function () {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  </script> -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

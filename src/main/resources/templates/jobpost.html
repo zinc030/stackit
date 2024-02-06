@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Post Details</title>
+</head>
+<body>
+    <h1>Job Post Details</h1>
+    <div th:insert="~{common/navbar}"></div>
+    <table>
+        <tr th:if="${loggedInUser!=null}">
+            <th>Bookmark</th>
+            <td>
+                <form th:action="@{/jobposts/{id}/bookmark(id=${jobPost.id})}" method="post">
+                    <input type="submit" th:value="${loggedInUser.hasBookmarked(jobPost) ? 'Remove Bookmark' : 'Add Bookmark'}">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td th:text="${jobPost.title}"></td>
+        </tr>
+        <tr>
+            <th>Company</th>
+            <td th:text="${jobPost.company.name}"></td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td th:text="${jobPost.location}"></td>
+        </tr>
+        <tr>
+            <th>Salary</th>
+            <td th:text="${jobPost.salary}"></td>
+        </tr>
+        <tr>
+            <th>Seniority</th>
+            <td th:text="${jobPost.seniority}"></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td th:text="${jobPost.description}"></td>
+        </tr>
+        <tr>
+            <th>Created Date</th>
+            <td th:text="${#dates.format(jobPost.createdDate, 'dd-MM-yyyy')}"></td>
+        </tr>
+        <tr>
+            <th>URL</th>
+            <td><a th:href="${jobPost.url}" th:text="${jobPost.url}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Companies</title>
+</head>
+<body>
+<h1>Companies</h1>
+<div th:insert="~{common/navbar}"></div>
+<form action="/company" method="get">
+    <input type="text" name="q" placeholder="Search companies">
+    <input type="submit" value="Search">
+</form>
+<ul>
+    <li th:each="company : ${companies}">
+        <a th:href="@{/company/{id}(id=${company.id})}" th:text="${company.name}"></a>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Posts</title>
+</head>
+<body>
+    <h1>Job Posts</h1>
+    <div th:insert="~{common/navbar}"></div>
+    <form id="searchForm" th:action="@{/jobposts/search}" method="post">
+        <input type="text" name="query" placeholder="Title or Company Name">
+        <input type="number" name="minSalary" placeholder="Minimum Salary">
+        <input type="number" name="maxSalary" placeholder="Max Salary">
+        
+        <div>
+            <label for="seniority">Seniority:</label><br>
+            <input type="checkbox" id="intern" name="seniority" value="INTERNSHIP">
+            <label for="intern">Internship</label><br>
+            <input type="checkbox" id="entry" name="seniority" value="ENTRY">
+            <label for="entry">Entry</label><br>
+            <input type="checkbox" id="junior" name="seniority" value="JUNIOR">
+            <label for="junior">Junior</label><br>
+            <input type="checkbox" id="mid_level" name="seniority" value="MID_SENIOR">
+            <label for="mid_level">Mid Level</label><br>
+            <input type="checkbox" id="senior" name="seniority" value="SENIOR">
+            <label for="senior">Senior</label><br>
+        </div>
+        
+        <div>
+            <label for="employmentType">Employment Type:</label><br>
+            <input type="checkbox" id="full_time" name="employmentType" value="FULLTIME">
+            <label for="full_time">Full Time</label><br>
+            <input type="checkbox" id="part_time" name="employmentType" value="PARTTIME">
+            <label for="part_time">Part Time</label><br>
+            <input type="checkbox" id="contract" name="employmentType" value="CONTRACT">
+            <label for="contract">Contract</label><br>
+            <input type="checkbox" id="intern" name="employmentType" value="INTERNSHIP">
+            <label for="intern">Internship</label><br>
+        </div>
+        
+        <div>
+            <label for="swFields">Software Fields:</label><br>
+            <input type="checkbox" id="frontend" name="swFields" value="FRONTEND">
+            <label for="frontend">Frontend</label><br>
+            <input type="checkbox" id="backend" name="swFields" value="BACKEND">
+            <label for="backend">Backend</label><br>
+            <input type="checkbox" id="fullstack" name="swFields" value="FULLSTACK">
+            <label for="fullstack">Fullstack</label><br>
+            <input type="checkbox" id="data_engineer" name="swFields" value="DATA_ENGINEER">
+            <label for="data_engineer">Data Engineer</label><br>
+            <input type="checkbox" id="data_science" name="swFields" value="DATA_SCIENCE">
+            <label for="data_science">Data Science</label><br>
+            <input type="checkbox" id="devops" name="swFields" value="DEVOPS">
+            <label for="devops">DevOps</label><br>
+            <input type="checkbox" id="cybersecurity" name="swFields" value="CYBERSECURITY">
+            <label for="cybersecurity">Cybersecurity</label><br>
+            <input type="checkbox" id="game_developer" name="swFields" value="GAME_DEVELOPER">
+            <label for="game_developer">Game Developmet</label><br>
+        </div>
+        
+        
+        <input type="submit" value="Search">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Salary</th>
+                <th>Seniority</th>
+                <th>Employment Type</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="jobPost : ${jobPosts}">
+                <td><a th:href="@{/jobposts/{id}(id=${jobPost.id})}" th:text="${jobPost.title}"></a></td>
+                <td th:text="${jobPost.company.name}"></td>
+                <td th:text="${jobPost.location}"></td>
+                <td th:text="${jobPost.salary}"></td>
+                <td th:text="${jobPost.seniority}"></td>
+                <td th:text="${jobPost.employmentType}"></td>
+                <td th:text="${#dates.format(jobPost.createdDate, 'dd-MM-yyyy')}"></td>
+                <td th:if="${loggedInUser!=null}">
+                    <form th:action="@{/jobposts/{id}/bookmark(id=${jobPost.id})}" method="post">
+                        <input type="submit" th:value="${loggedInUser.hasBookmarked(jobPost) ? 'Remove Bookmark' : 'Bookmark'}">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+<script>
+// When a checkbox is clicked, save its checked state to Local Storage
+document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function(event) {
+        localStorage.setItem(event.target.id, event.target.checked);
+    });
+});
+
+// When the page loads, check Local Storage for any saved checkbox states and apply them
+window.addEventListener('load', function() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+        var checked = localStorage.getItem(checkbox.id);
+        if (checked !== null) {
+            checkbox.checked = checked === 'true';
+        }
+    });
+});
+</script>
+</html>

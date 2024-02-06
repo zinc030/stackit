@@ -1,0 +1,171 @@
+<!-- Issues with resumeForm.html
+- When user adds an item (education, work experience, skill, project, certificate, award),
+    and submits the form, one extra record with null values is created. 
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resume Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>New Resume</h1>
+    <div th:insert="~{common/navbar}"></div>
+
+    <form th:action="@{/resume/new}" th:object="${resume}" method="post">
+        <label for="position">Position:</label><br>
+        <input id="position" type="text" th:field="*{positionName}"><br>
+
+        <label for="selfIntroduction">Self Introduction:</label><br>
+        <textarea id="selfIntroduction" th:field="*{selfIntroduction}"></textarea><br>
+
+        <div id="educations">
+            <p>Education:</p>
+            <!-- Existing educations will be rendered here by Thymeleaf -->
+        </div>
+        <button type="button" id="addEducation">Add Education</button>
+
+        <div id="workExperiences">
+            <p>Work Experiences:</p>
+            <!-- Existing work experiences will be rendered here by Thymeleaf -->
+        </div>
+        <button type="button" id="addWorkExperience">Add Work Experience</button>
+
+        <div id="skills">
+            <p>Skills:</p>
+            <!-- Existing skills will be rendered here by Thymeleaf -->
+        </div>
+        <button type="button" id="addSkill">Add Skill</button>
+
+        <div id="projects">
+            <p>Projects:</p>
+            <!-- Existing projects will be rendered here by Thymeleaf -->
+        </div>
+        <button type="button" id="addProject">Add Project</button>
+
+        <div id="certificates">
+            <p>Certificates:</p>
+            <!-- Existing certificates will be rendered here by Thymeleaf -->
+        </div>
+        <button type="button" id="addCertificate">Add Certificate</button>
+
+        <div id="awards">
+            <p>Awards:</p>
+            <!-- Existing awards will be rendered here by Thymeleaf -->
+        </div>
+        <button type="button" id="addAward">Add Award</button>
+
+        <input type="submit" value="Submit">
+    </form>
+
+<script>
+$(document).ready(function() {
+    var educationIndex = $('#educations').children().length;
+    var workExperienceIndex = $('#workExperiences').children().length;
+    var skillIndex = $('#skills').children().length;
+    var projectIndex = $('#projects').children().length;
+    var certificateIndex = $('#certificates').children().length;
+    var awardIndex = $('#awards').children().length;
+
+    $('#addEducation').click(function() {
+        var educationDiv = $(`
+            <div>
+                <label for="schoolName${educationIndex}">School Name:</label><br>
+                <input id="schoolName${educationIndex}" type="text" th:field="*{educations[${educationIndex}].schoolName}" name="educations[${educationIndex}].schoolName"><br>
+                <label for="degreeName${educationIndex}">Degree Name:</label><br>
+                <input id="degreeName${educationIndex}" type="text" th:field="*{educations[${educationIndex}].degreeName}" name="educations[${educationIndex}].degreeName"><br>
+                <label for="grades${educationIndex}">Grades:</label><br>
+                <input id="grades${educationIndex}" type="text" th:field="*{educations[${educationIndex}].grades}" name="educations[${educationIndex}].grades"><br>
+                <label for="startYear${educationIndex}">Start Year:</label><br>
+                <input id="startYear${educationIndex}" type="text" th:field="*{educations[${educationIndex}].startYear}" name="educations[${educationIndex}].startYear"><br>
+                <label for="endYear${educationIndex}">End Year:</label><br>
+                <input id="endYear${educationIndex}" type="text" th:field="*{educations[${educationIndex}].endYear}" name="educations[${educationIndex}].endYear"><br>
+                <button type="button" class="removeEducation">Remove</button>
+            </div>
+        `);
+
+        educationDiv.find('.removeEducation').click(function() {
+            educationDiv.remove();
+            educationIndex = $('#educations').children().length;
+        });
+
+        $('#educations').append(educationDiv);
+        educationIndex = $('#educations').children().length;
+    });
+
+    $('#addWorkExperience').click(function() {
+        $('#workExperiences').append(`
+            <div>
+                <label for="companyName${workExperienceIndex}">Company Name:</label><br>
+                <input id="companyName${workExperienceIndex}" type="text" th:field="*{workExperiences[${workExperienceIndex}].companyName}" name="workExperiences[${workExperienceIndex}].companyName"><br>
+                <label for="position${workExperienceIndex}">Position:</label><br>
+                <input id="position${workExperienceIndex}" type="text" th:field="*{workExperiences[${workExperienceIndex}].position}" name="workExperiences[${workExperienceIndex}].position"><br>
+                <label for="description${workExperienceIndex}">Description:</label><br>
+                <input id="description${workExperienceIndex}" type="text" th:field="*{workExperiences[${workExperienceIndex}].description}" name="workExperiences[${workExperienceIndex}].description"><br>
+                <label for="years${workExperienceIndex}">Years:</label><br>
+                <input id="years${workExperienceIndex}" type="text" th:field="*{workExperiences[${workExperienceIndex}].years}" name="workExperiences[${workExperienceIndex}].years"><br>
+            </div>
+        `);
+
+        workExperienceIndex++;
+    });
+
+    $('#addSkill').click(function() {
+        $('#skills').append(`
+            <div>
+                <label for="skillName${skillIndex}">Skill Name:</label><br>
+                <input id="skillName${skillIndex}" type="text" th:field="*{skills[${skillIndex}].skillName}" name="skills[${skillIndex}].skillName"><br>
+            </div>
+        `);
+
+        skillIndex++;
+    });
+
+    $('#addProject').click(function() {
+        $('#projects').append(`
+            <div>
+                <label for="projectTitle${projectIndex}">Project Title:</label><br>
+                <input id="projectTitle${projectIndex}" type="text" th:field="*{projects[${projectIndex}].projectTitle}" name="projects[${projectIndex}].projectTitle"><br>
+                <label for="description${projectIndex}">Description:</label><br>
+                <input id="description${projectIndex}" type="text" th:field="*{projects[${projectIndex}].description}" name="projects[${projectIndex}].description"><br>
+                <label for="years${projectIndex}">Years:</label><br>
+                <input id="years${projectIndex}" type="text" th:field="*{projects[${projectIndex}].years}" name="projects[${projectIndex}].years"><br>
+                <label for="stackUsed${projectIndex}">Stack Used:</label><br>
+                <input id="stackUsed${projectIndex}" type="text" th:field="*{projects[${projectIndex}].stackUsed}" name="projects[${projectIndex}].stackUsed"><br>
+            </div>
+        `);
+
+        projectIndex++;
+    });
+
+    $('#addCertificate').click(function() {
+        $('#certificates').append(`
+            <div>
+                <label for="certificateName${certificateIndex}">Certificate Name:</label><br>
+                <input id="certificateName${certificateIndex}" type="text" th:field="*{certificates[${certificateIndex}].certificateName}" name="certificates[${certificateIndex}].certificateName"><br>
+                <label for="yearObtained${certificateIndex}">Year Obtained:</label><br>
+                <input id="yearObtained${certificateIndex}" type="text" th:field="*{certificates[${certificateIndex}].yearObtained}" name="certificates[${certificateIndex}].yearObtained"><br>
+            </div>
+        `);
+
+        certificateIndex++;
+    });
+
+    $('#addAward').click(function() {
+        $('#awards').append(`
+            <div>
+                <label for="awardName${awardIndex}">Award Name:</label><br>
+                <input id="awardName${awardIndex}" type="text" th:field="*{awards[${awardIndex}].awardName}" name="awards[${awardIndex}].awardName"><br>
+                <label for="yearReceived${awardIndex}">Year Received:</label><br>
+                <input id="yearReceived${awardIndex}" type="text" th:field="*{awards[${awardIndex}].yearReceived}" name="awards[${awardIndex}].yearReceived"><br>
+            </div>
+        `);
+
+        awardIndex++;
+    });
+});
+
+</script>
+</body>
+</html>
