@@ -3,6 +3,9 @@
 <head>
     <title>Company Reviews</title>
     <style>
+        li {
+            list-style-type: none;
+        }
         .cont {
             display: flex;
             flex-direction: column;
@@ -71,7 +74,7 @@
     <input type="submit" value="Filter">
 </form>
 
-<ul>
+<ul class="container">
     <li th:each="review : ${reviews}">
         <h3 th:text="${review.title}"></h3>
         <form th:if="${loggedInUser!=null and loggedInUser.username == review.user.username}" th:action="@{/company/{companyId}/reviews/{reviewId}/edit(companyId=${company.id}, reviewId=${review.id})}" method="get">
@@ -82,9 +85,9 @@
         </form>
         <p th:text="${review.swField}"></p>
         <p th:text="${review.status}"></p>
-        <p th:text="${review.rating}"></p>
-        <p th:text="${review.pro}"></p>
-        <p th:text="${review.con}"></p>
+        Rating:<p th:text="${review.rating}"></p>
+        Pro:<p th:text="${review.pro}"></p>
+        Con:<p th:text="${review.con}"></p>
         <div>Helpful votes: <span th:text="${review.voteCount}"></span></div>
         <p th:text="${review.createdDate}"></p>
         <form th:if="${loggedInUser!=null}" th:action="@{/company/reviews/{id}/helpfulVote(id=${review.id})}" method="post">
@@ -93,8 +96,8 @@
         </form>
         <form th:if="${loggedInUser!=null}" th:action="@{'/company/' + ${company.id} + '/reviews/' + ${review.id} + '/report'}" th:object="${report}" method="post">
             <select th:field="*{reason}">
-                <option value="Reason 1">Reason 1</option>
-                <option value="Reason 2">Reason 2</option>
+                <option value="Reason 1">Misinformation</option>
+                <option value="Reason 2">Verbal Abuse</option>
                 <!-- Add more options as needed -->
             </select>
             <button type="submit">Report</button>
