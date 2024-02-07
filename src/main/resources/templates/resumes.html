@@ -13,7 +13,7 @@
     <!-- get method link button for new resume (/resume/new) -->
     <a th:href="@{/resume/new}">New Resume (새 이력서)</a>
 
-    <ul>
+    <ul class="container">
         <li th:each="resume : ${resumes}">
             <a th:href="@{/resume/{id}(id=${resume.id})}" th:text="${resume.positionName}"></a>
             <!-- create date -->
@@ -24,7 +24,7 @@
 
             <!-- Delete button -->
             <form th:action="@{/resume/{id}/delete(id=${resume.id})}" method="post">
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn2" value="Delete">
             </form>
         </li>
     </ul>

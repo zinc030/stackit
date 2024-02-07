@@ -6,11 +6,11 @@
 <body>
     <div th:insert="~{common/navbar}"></div>
     <h1>Companies</h1>
-<form action="/company" method="get">
+<form action="/company" method="get" class="container">
     <input type="text" name="q" placeholder="Search companies">
     <input type="submit" value="Search">
 </form>
-<ul>
+<ul class="container">
     <li th:each="company : ${companies}">
         <a th:href="@{/company/{id}(id=${company.id})}" th:text="${company.name}"></a>
     </li>
